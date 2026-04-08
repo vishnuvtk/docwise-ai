@@ -1,0 +1,7 @@
+Docwise AI is a small internal question-and-answer tool for a preloaded document library.
+
+The app should answer only from the documents that ship with the deployment bundle. If the library does not support the question, the app must refuse instead of improvising.
+
+The first release is single-turn only. Users ask one question at a time and review the answer alongside the supporting evidence.
+
+Answers should stay concise by default. The system can mention when multiple documents appear to conflict, but it should not collapse those disagreements into a single invented conclusion.
