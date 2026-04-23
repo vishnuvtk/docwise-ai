@@ -81,10 +81,10 @@ Multi-turn conversational memory is intentionally not implemented in v1.
 
 Detailed artifacts live in:
 
-- [cases.md](C:/Users/vishn/docwise-ai/evaluation/cases.md)
-- [results.md](C:/Users/vishn/docwise-ai/evaluation/results.md)
-- [baseline-comparison.md](C:/Users/vishn/docwise-ai/evaluation/baseline-comparison.md)
-- [improvement-note.md](C:/Users/vishn/docwise-ai/evaluation/improvement-note.md)
+- [cases.md](evaluation/cases.md)
+- [results.md](evaluation/results.md)
+- [baseline-comparison.md](evaluation/baseline-comparison.md)
+- [improvement-note.md](evaluation/improvement-note.md)
 
 ### Output Quality Evaluation
 
