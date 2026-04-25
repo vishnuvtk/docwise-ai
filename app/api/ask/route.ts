@@ -4,6 +4,37 @@ import { questionAnsweringService } from "@/lib/qa/service";
 
 export const runtime = "nodejs";
 
+function getAnswerFailure(error: unknown) {
+  const status =
+    typeof error === "object" &&
+    error !== null &&
+    "status" in error &&
+    typeof error.status === "number"
+      ? error.status
+      : null;
+
+  if (status === 429) {
+    return {
+      status: 429,
+      message:
+        "Gemini quota is temporarily exhausted. Try again after the quota resets or update the Gemini API billing/quota settings.",
+    };
+  }
+
+  if (status === 401 || status === 403) {
+    return {
+      status: 502,
+      message:
+        "Gemini rejected the server API key. Check the deployment environment variable and API key permissions.",
+    };
+  }
+
+  return {
+    status: 500,
+    message: "The documents were loaded, but answer generation failed.",
+  };
+}
+
 export async function POST(request: Request) {
   const availability = questionAnsweringService.getAvailability();
 
@@ -28,12 +59,13 @@ export async function POST(request: Request) {
     return NextResponse.json(answer);
   } catch (error) {
     console.error("Failed to answer question", error);
+    const failure = getAnswerFailure(error);
     return NextResponse.json(
       {
         status: "error",
-        error: "The documents were loaded, but answer generation failed.",
+        error: failure.message,
       },
-      { status: 500 },
+      { status: failure.status },
     );
   }
 }
